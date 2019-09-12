@@ -1,6 +1,9 @@
 package com.anthonyzero.protocol;
 
 import com.anthonyzero.protocol.request.LoginRequestPacket;
+import com.anthonyzero.protocol.request.MessageRequestPacket;
+import com.anthonyzero.protocol.response.LoginResponsePacket;
+import com.anthonyzero.protocol.response.MessageResponsePacket;
 import com.anthonyzero.serialize.Serializer;
 import com.anthonyzero.serialize.impl.JSONSerializer;
 import io.netty.buffer.ByteBuf;
@@ -19,12 +22,15 @@ public class PacketCodec {
     private final Map<Byte, Class<? extends Packet>> packetTypeMap; //每个指令 对应一个数据包
     private final Map<Byte, Serializer> serializerMap; //序列化算法 对应 它的实现
 
-    public static final PacketCodec INSTANCE = new PacketCodec();  //实例
+    public static final PacketCodec INSTANCE = new PacketCodec();  //实例 单例
 
     private PacketCodec()  {
+        // 对于每一种业务handler 所对应的请求 响应数据 要记住添加在这 否则序列化失败
         packetTypeMap = new HashMap<>();
         packetTypeMap.put(Command.LOGIN_REQUEST, LoginRequestPacket.class);
-
+        packetTypeMap.put(Command.LOGIN_RESPONSE, LoginResponsePacket.class);
+        packetTypeMap.put(Command.MESSAGE_REQUEST, MessageRequestPacket.class);
+        packetTypeMap.put(Command.MESSAGE_RESPONSE, MessageResponsePacket.class);
 
         serializerMap = new HashMap<>();
         Serializer serializer = new JSONSerializer();
