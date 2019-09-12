@@ -24,7 +24,7 @@ public class NettyClient {
                     .handler(new ChannelInitializer<SocketChannel>() {
                         protected void initChannel(SocketChannel socketChannel) throws Exception {
                             ChannelPipeline pipeline = socketChannel.pipeline();
-                            pipeline.addLast("decoder",new StringDecoder());
+                            pipeline.addLast("decoder",new StringDecoder()); //需添加编码解码器 否则操作数据相关事件如read不回调
                             pipeline.addLast("encoder",new StringEncoder());
                             pipeline.addLast(new ClientHandler());
                             pipeline.addLast(new ClientOutHandler());
@@ -40,9 +40,9 @@ public class NettyClient {
                 }
                 future.channel().writeAndFlush(demand);
             }
-            future.channel().closeFuture().sync();
+            /*future.channel().closeFuture().sync(); 这会阻塞*/
         } finally {
-            group.shutdownGracefully();
+            group.shutdownGracefully();  //优雅关闭
         }
     }
 }
