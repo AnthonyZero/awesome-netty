@@ -3,6 +3,7 @@ package com.anthonyzero.client;
 import com.anthonyzero.client.handler.LoginResponseHandler;
 import com.anthonyzero.codec.PacketDecoder;
 import com.anthonyzero.codec.PacketEncoder;
+import com.anthonyzero.codec.Spliter;
 import com.anthonyzero.console.LoginConsoleCommand;
 import com.anthonyzero.utils.SessionUtil;
 import io.netty.bootstrap.Bootstrap;
@@ -35,6 +36,7 @@ public class WechatClient {
                     @Override
                     protected void initChannel(SocketChannel socketChannel) throws Exception {
                         ChannelPipeline pipeline = socketChannel.pipeline();
+                        pipeline.addLast(new Spliter());
                         // 解码器
                         pipeline.addLast(new PacketDecoder());
 

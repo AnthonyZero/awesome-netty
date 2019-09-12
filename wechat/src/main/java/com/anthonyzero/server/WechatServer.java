@@ -1,6 +1,7 @@
 package com.anthonyzero.server;
 
 import com.anthonyzero.codec.PacketCodecHandler;
+import com.anthonyzero.codec.Spliter;
 import com.anthonyzero.server.handler.LoginRequestHandler;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
@@ -35,6 +36,7 @@ public class WechatServer {
                     .childHandler(new ChannelInitializer<NioSocketChannel>() {
                         protected void initChannel(NioSocketChannel nioSocketChannel) throws Exception {
                             ChannelPipeline pipeline =  nioSocketChannel.pipeline();
+                            pipeline.addLast(new Spliter());
                             //编码解码器
                             pipeline.addLast(PacketCodecHandler.INSTANCE);
                             pipeline.addLast(new LoginRequestHandler());

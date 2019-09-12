@@ -18,7 +18,7 @@ import java.util.Map;
 public class PacketCodec {
 
 
-    private static final int MAGIC_NUMBER = 0x12345678; //第一个字段是魔数 4个字节
+    public static final int MAGIC_NUMBER = 0x12345678; //第一个字段是魔数 4个字节
     private final Map<Byte, Class<? extends Packet>> packetTypeMap; //每个指令 对应一个数据包
     private final Map<Byte, Serializer> serializerMap; //序列化算法 对应 它的实现
 
