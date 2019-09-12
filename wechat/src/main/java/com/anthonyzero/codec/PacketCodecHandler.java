@@ -10,7 +10,7 @@ import io.netty.handler.codec.MessageToMessageCodec;
 import java.util.List;
 
 /**
- * 作为server端的编码解码器
+ * 作为server端的编码解码器  一般先进（解码） 出去（编码）
  */
 @ChannelHandler.Sharable
 public class PacketCodecHandler extends MessageToMessageCodec<ByteBuf, Packet> {
@@ -22,7 +22,7 @@ public class PacketCodecHandler extends MessageToMessageCodec<ByteBuf, Packet> {
     }
 
     /**
-     * 编码
+     * 编码  出方向 发生
      * @param channelHandlerContext
      * @param packet
      * @param list
@@ -36,7 +36,7 @@ public class PacketCodecHandler extends MessageToMessageCodec<ByteBuf, Packet> {
     }
 
     /**
-     * 解码
+     * 解码 入方向 发生
      * @param channelHandlerContext
      * @param byteBuf
      * @param list

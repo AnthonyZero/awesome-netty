@@ -7,7 +7,8 @@ import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.MessageToByteEncoder;
 
 /**
- * 编码器  对我们的java对象 packet 进行编码 -》字节
+ * client
+ * 编码器  对我们的java对象 packet 进行编码 -》字节 出方向
  */
 public class PacketEncoder extends MessageToByteEncoder<Packet> {
     @Override
