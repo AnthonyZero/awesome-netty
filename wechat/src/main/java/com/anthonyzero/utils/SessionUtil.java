@@ -29,4 +29,24 @@ public class SessionUtil {
 
         return getSession(channel) != null;
     }
+
+    /**
+     * 通过userid 获取自身channel
+     * @param userId
+     * @return
+     */
+    public static Channel getChannel(String userId) {
+
+        return userIdChannelMap.get(userId);
+    }
+
+
+    public static void unBindSession(Channel channel) {
+        if (hasLogin(channel)) {
+            Session session = getSession(channel);
+            userIdChannelMap.remove(session.getUserId());
+            channel.attr(Attributes.SESSION).set(null);
+            System.out.println(session + " 退出登录!");
+        }
+    }
 }
