@@ -4,6 +4,7 @@ import com.anthonyzero.codec.PacketCodecHandler;
 import com.anthonyzero.codec.Spliter;
 import com.anthonyzero.server.handler.AuthHandler;
 import com.anthonyzero.server.handler.LoginRequestHandler;
+import com.anthonyzero.server.handler.MessageRequestHandler;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
@@ -43,6 +44,7 @@ public class WechatServer {
                             pipeline.addLast(PacketCodecHandler.INSTANCE);
                             pipeline.addLast(LoginRequestHandler.INSTANCE);
                             pipeline.addLast(AuthHandler.INSTANCE);
+                            pipeline.addLast(MessageRequestHandler.INSTANCE);
                         }
                     });
             ChannelFuture channelFuture = serverBootstrap.bind().sync();

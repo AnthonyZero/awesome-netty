@@ -15,6 +15,7 @@ public class AuthHandler extends ChannelInboundHandlerAdapter {
 
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
+        //客户端如果第一个指令为非登录指令，AuthHandler 直接将客户端连接关闭
         if (!SessionUtil.hasLogin(ctx.channel())) {
             //如果未登录，直接强制关闭连接
             ctx.channel().close();

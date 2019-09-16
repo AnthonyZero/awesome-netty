@@ -7,11 +7,11 @@ import lombok.Data;
 @Data
 public class MessageResponsePacket extends Packet {
 
-    private String fromUserId;
+    private String fromUserId; //发送方userId
 
-    private String fromUserName;
+    private String fromUserName; //发送方userName
 
-    private String message;
+    private String message;  //发送的消息
 
     @Override
     public Byte getCommand() {

@@ -8,8 +8,8 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class MessageRequestPacket extends Packet {
-    private String toUserId;
-    private String message;
+    private String toUserId; //接受方userId
+    private String message; //要发送的消息
 
     public MessageRequestPacket(String toUserId, String message) {
         this.toUserId = toUserId;

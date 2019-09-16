@@ -1,10 +1,12 @@
 package com.anthonyzero.client;
 
 import com.anthonyzero.client.handler.LoginResponseHandler;
+import com.anthonyzero.client.handler.MessageResponseHandler;
 import com.anthonyzero.codec.PacketDecoder;
 import com.anthonyzero.codec.PacketEncoder;
 import com.anthonyzero.codec.Spliter;
 import com.anthonyzero.console.LoginConsoleCommand;
+import com.anthonyzero.console.SendToUserConsoleCommand;
 import com.anthonyzero.utils.SessionUtil;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.*;
@@ -36,11 +38,14 @@ public class WechatClient {
                     @Override
                     protected void initChannel(SocketChannel socketChannel) throws Exception {
                         ChannelPipeline pipeline = socketChannel.pipeline(); // handler顺序 从上到下
+                        // 拆包
                         pipeline.addLast(new Spliter());
                         // 解码器
                         pipeline.addLast(new PacketDecoder());
-
+                        // 登录响应
                         pipeline.addLast(new LoginResponseHandler());
+                        // 收消息响应
+                        pipeline.addLast(new MessageResponseHandler());
 
                         //编码器
                         pipeline.addLast(new PacketEncoder());
@@ -87,10 +92,11 @@ public class WechatClient {
         new Thread(() -> {
            while (!Thread.interrupted()) {
               if (!SessionUtil.hasLogin(channel)) {
-                   //进行登录
-                   loginConsoleCommand.exec(scanner, channel);
+                  //进行登录
+                  loginConsoleCommand.exec(scanner, channel);
               } else {
-                   //登录之后的聊天
+                  //登录之后的聊天
+                  new SendToUserConsoleCommand().exec(scanner, channel);
               }
            }
         }).start();
