@@ -55,6 +55,8 @@ public class WechatClient {
                         pipeline.addLast(new ListGroupMembersResponseHandler());
                         // 发送群消息 响应处理器
                         pipeline.addLast(new GroupMessageResponseHandler());
+                        // 退出登录
+                        pipeline.addLast(new LogoutResponseHandler());
                         //编码器
                         pipeline.addLast(new PacketEncoder());
                     }

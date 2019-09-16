@@ -42,12 +42,8 @@ public class WechatServer {
                             pipeline.addLast(PacketCodecHandler.INSTANCE);
                             pipeline.addLast(LoginRequestHandler.INSTANCE);
                             pipeline.addLast(AuthHandler.INSTANCE);
-                            pipeline.addLast(MessageRequestHandler.INSTANCE);
-                            pipeline.addLast(CreateGroupRequestHandler.INSTANCE);
-                            pipeline.addLast(JoinGroupRequestHandler.INSTANCE);
-                            pipeline.addLast(QuitGroupRequestHandler.INSTANCE);
-                            pipeline.addLast(ListGroupMembersRequestHandler.INSTANCE);
-                            pipeline.addLast(GroupMessageRequestHandler.INSTANCE);
+                            //聊天请求处理器
+                            pipeline.addLast(IMHandler.INSTANCE);
                         }
                     });
             ChannelFuture channelFuture = serverBootstrap.bind().sync();
