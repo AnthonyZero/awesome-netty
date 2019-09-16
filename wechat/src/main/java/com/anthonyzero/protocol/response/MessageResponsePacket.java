@@ -13,6 +13,8 @@ public class MessageResponsePacket extends Packet {
 
     private String message;  //发送的消息
 
+    private boolean success; //发送成功与否
+
     @Override
     public Byte getCommand() {
         return Command.MESSAGE_RESPONSE;

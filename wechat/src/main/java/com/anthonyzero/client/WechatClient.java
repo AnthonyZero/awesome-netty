@@ -5,8 +5,8 @@ import com.anthonyzero.client.handler.MessageResponseHandler;
 import com.anthonyzero.codec.PacketDecoder;
 import com.anthonyzero.codec.PacketEncoder;
 import com.anthonyzero.codec.Spliter;
+import com.anthonyzero.console.ConsoleCommandManager;
 import com.anthonyzero.console.LoginConsoleCommand;
-import com.anthonyzero.console.SendToUserConsoleCommand;
 import com.anthonyzero.utils.SessionUtil;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.*;
@@ -96,7 +96,7 @@ public class WechatClient {
                   loginConsoleCommand.exec(scanner, channel);
               } else {
                   //登录之后的聊天
-                  new SendToUserConsoleCommand().exec(scanner, channel);
+                  new ConsoleCommandManager().exec(scanner, channel);
               }
            }
         }).start();

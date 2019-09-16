@@ -32,13 +32,16 @@ public class MessageRequestHandler extends SimpleChannelInboundHandler<MessageRe
         MessageResponsePacket reponse = new MessageResponsePacket();
         reponse.setFromUserId(session.getUserId());
         reponse.setFromUserName(session.getUserName());
-        reponse.setMessage(messageRequestPacket.getMessage());
 
-        //4.将消息发送给消息接收方
+        //4.成功将消息发送给消息接收方 失败发给自己提示失败消息
         if (toUserChannel != null && SessionUtil.hasLogin(toUserChannel)) {
+            reponse.setSuccess(true);
+            reponse.setMessage(messageRequestPacket.getMessage());
             toUserChannel.writeAndFlush(reponse);
         } else {
-            System.err.println("[" + messageRequestPacket.getToUserId() + "] 不在线，发送失败!");
+            reponse.setSuccess(false);
+            reponse.setMessage("[" + messageRequestPacket.getToUserId() + "] 不在线，发送失败!");
+            channelHandlerContext.channel().writeAndFlush(reponse);
         }
     }
 }
