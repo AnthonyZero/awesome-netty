@@ -2,10 +2,7 @@ package com.anthonyzero.server;
 
 import com.anthonyzero.codec.PacketCodecHandler;
 import com.anthonyzero.codec.Spliter;
-import com.anthonyzero.server.handler.AuthHandler;
-import com.anthonyzero.server.handler.CreateGroupRequestHandler;
-import com.anthonyzero.server.handler.LoginRequestHandler;
-import com.anthonyzero.server.handler.MessageRequestHandler;
+import com.anthonyzero.server.handler.*;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
@@ -47,6 +44,7 @@ public class WechatServer {
                             pipeline.addLast(AuthHandler.INSTANCE);
                             pipeline.addLast(MessageRequestHandler.INSTANCE);
                             pipeline.addLast(CreateGroupRequestHandler.INSTANCE);
+                            pipeline.addLast(JoinGroupRequestHandler.INSTANCE);
                         }
                     });
             ChannelFuture channelFuture = serverBootstrap.bind().sync();
