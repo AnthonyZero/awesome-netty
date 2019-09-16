@@ -18,6 +18,7 @@ public class ConsoleCommandManager implements ConsoleCommand {
         consoleCommandMap.put("send", new SendToUserConsoleCommand());
         consoleCommandMap.put("cg", new CreateGroupConsoleCommand());
         consoleCommandMap.put("jg", new JoinGroupConsoleCommand());
+        consoleCommandMap.put("qg", new QuitGroupConsoleCommand());
     }
 
     @Override
@@ -31,9 +32,10 @@ public class ConsoleCommandManager implements ConsoleCommand {
             consoleCommand.exec(scanner, channel);
         } else {
             System.err.println("无法识别[" + command + "]指令，请重新输入!");
-            System.out.println("-----------send: 发消息某人---------------");
+            System.out.println("-----------send: 发消息给某人---------------");
             System.out.println("-----------cg: 创建群聊-------------------");
             System.out.println("-----------jg: 加入群聊-------------------");
+            System.out.println("-----------qg: 退出群聊-------------------");
             System.out.println("-----------logout: 退出登录---------------");
         }
         waitForLoginResponse();

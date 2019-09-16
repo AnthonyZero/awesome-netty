@@ -1,13 +1,7 @@
 package com.anthonyzero.protocol;
 
-import com.anthonyzero.protocol.request.CreateGroupRequestPacket;
-import com.anthonyzero.protocol.request.JoinGroupRequestPacket;
-import com.anthonyzero.protocol.request.LoginRequestPacket;
-import com.anthonyzero.protocol.request.MessageRequestPacket;
-import com.anthonyzero.protocol.response.CreateGroupResponsePacket;
-import com.anthonyzero.protocol.response.JoinGroupResponsePacket;
-import com.anthonyzero.protocol.response.LoginResponsePacket;
-import com.anthonyzero.protocol.response.MessageResponsePacket;
+import com.anthonyzero.protocol.request.*;
+import com.anthonyzero.protocol.response.*;
 import com.anthonyzero.serialize.Serializer;
 import com.anthonyzero.serialize.impl.JSONSerializer;
 import io.netty.buffer.ByteBuf;
@@ -39,6 +33,8 @@ public class PacketCodec {
         packetTypeMap.put(Command.CREATE_GROUP_RESPONSE, CreateGroupResponsePacket.class);
         packetTypeMap.put(Command.JOIN_GROUP_REQUEST, JoinGroupRequestPacket.class);
         packetTypeMap.put(Command.JOIN_GROUP_RESPONSE, JoinGroupResponsePacket.class);
+        packetTypeMap.put(Command.QUIT_GROUP_REQUEST, QuitGroupRequestPacket.class);
+        packetTypeMap.put(Command.QUIT_GROUP_RESPONSE, QuitGroupResponsePacket.class);
 
         serializerMap = new HashMap<>();
         Serializer serializer = new JSONSerializer();
