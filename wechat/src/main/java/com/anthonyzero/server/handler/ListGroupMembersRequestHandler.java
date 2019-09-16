@@ -29,7 +29,7 @@ public class ListGroupMembersRequestHandler extends SimpleChannelInboundHandler<
         ChannelGroup channelGroup = SessionUtil.getChannelGroup(groupId);
         if (channelGroup == null) {
             response.setSuccess(false);
-            response.setErrorMsg("群不存在，获取群成员列表失败");
+            response.setErrorMsg("群不存在");
             channelHandlerContext.writeAndFlush(response);
             return;
         }

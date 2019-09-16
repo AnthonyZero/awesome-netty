@@ -47,6 +47,7 @@ public class WechatServer {
                             pipeline.addLast(JoinGroupRequestHandler.INSTANCE);
                             pipeline.addLast(QuitGroupRequestHandler.INSTANCE);
                             pipeline.addLast(ListGroupMembersRequestHandler.INSTANCE);
+                            pipeline.addLast(GroupMessageRequestHandler.INSTANCE);
                         }
                     });
             ChannelFuture channelFuture = serverBootstrap.bind().sync();

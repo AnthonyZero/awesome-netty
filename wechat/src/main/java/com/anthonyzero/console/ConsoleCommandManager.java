@@ -20,6 +20,7 @@ public class ConsoleCommandManager implements ConsoleCommand {
         consoleCommandMap.put("jg", new JoinGroupConsoleCommand());
         consoleCommandMap.put("qg", new QuitGroupConsoleCommand());
         consoleCommandMap.put("lg", new ListGroupMembersConsoleCommand());
+        consoleCommandMap.put("sg", new SendToGroupConsoleCommand());
     }
 
     @Override
@@ -38,6 +39,7 @@ public class ConsoleCommandManager implements ConsoleCommand {
             System.out.println("-----------jg: 加入群聊-------------------");
             System.out.println("-----------qg: 退出群聊-------------------");
             System.out.println("-----------lg: 获取群成员列表--------------");
+            System.out.println("-----------sg: 发送群消息------------------");
             System.out.println("-----------logout: 退出登录---------------");
         }
         waitForLoginResponse();
