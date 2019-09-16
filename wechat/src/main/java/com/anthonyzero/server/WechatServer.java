@@ -2,6 +2,7 @@ package com.anthonyzero.server;
 
 import com.anthonyzero.codec.PacketCodecHandler;
 import com.anthonyzero.codec.Spliter;
+import com.anthonyzero.server.handler.AuthHandler;
 import com.anthonyzero.server.handler.LoginRequestHandler;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
@@ -35,11 +36,13 @@ public class WechatServer {
                     .childOption(ChannelOption.TCP_NODELAY, true) //开启Nagle算法，true表示关闭，false表示开启
                     .childHandler(new ChannelInitializer<NioSocketChannel>() {
                         protected void initChannel(NioSocketChannel nioSocketChannel) throws Exception {
-                            ChannelPipeline pipeline =  nioSocketChannel.pipeline();
+                            ChannelPipeline pipeline =  nioSocketChannel.pipeline(); // handler顺序 从上到下
+                            //拆包器 decode
                             pipeline.addLast(new Spliter());
                             //编码解码器
                             pipeline.addLast(PacketCodecHandler.INSTANCE);
-                            pipeline.addLast(new LoginRequestHandler());
+                            pipeline.addLast(LoginRequestHandler.INSTANCE);
+                            pipeline.addLast(AuthHandler.INSTANCE);
                         }
                     });
             ChannelFuture channelFuture = serverBootstrap.bind().sync();

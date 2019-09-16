@@ -35,7 +35,7 @@ public class WechatClient {
                 .handler(new ChannelInitializer<SocketChannel>() {
                     @Override
                     protected void initChannel(SocketChannel socketChannel) throws Exception {
-                        ChannelPipeline pipeline = socketChannel.pipeline();
+                        ChannelPipeline pipeline = socketChannel.pipeline(); // handler顺序 从上到下
                         pipeline.addLast(new Spliter());
                         // 解码器
                         pipeline.addLast(new PacketDecoder());
@@ -86,12 +86,12 @@ public class WechatClient {
 
         new Thread(() -> {
            while (!Thread.interrupted()) {
-               if (!SessionUtil.hasLogin(channel)) {
+              if (!SessionUtil.hasLogin(channel)) {
                    //进行登录
                    loginConsoleCommand.exec(scanner, channel);
-               } else {
+              } else {
                    //登录之后的聊天
-               }
+              }
            }
         }).start();
     }
