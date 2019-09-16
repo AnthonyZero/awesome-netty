@@ -10,7 +10,7 @@ public class QuitGroupResponseHandler extends SimpleChannelInboundHandler<QuitGr
         if (quitGroupResponsePacket.isSuccess()) {
             System.out.println("退出群聊[" + quitGroupResponsePacket.getGroupId() + "]成功！");
         } else {
-            System.out.println("退出群聊[" + quitGroupResponsePacket.getGroupId() + "]失败! 失败原因为："  + quitGroupResponsePacket.getErrorMsg());
+            System.err.println("退出群聊[" + quitGroupResponsePacket.getGroupId() + "]失败! 失败原因为："  + quitGroupResponsePacket.getErrorMsg());
         }
     }
 }

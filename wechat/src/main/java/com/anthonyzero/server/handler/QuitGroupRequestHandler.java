@@ -39,6 +39,10 @@ public class QuitGroupRequestHandler extends SimpleChannelInboundHandler<QuitGro
 
         response.setSuccess(true);
         channelGroup.remove(channelHandlerContext.channel());
+        //当群聊里最后一个人退出的时候 移除群聊组
+        if (channelGroup.isEmpty()) {
+            SessionUtil.removeChannelGroup(groupId);
+        }
         channelHandlerContext.writeAndFlush(response);
     }
 }
