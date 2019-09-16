@@ -16,6 +16,7 @@ public class ConsoleCommandManager implements ConsoleCommand {
     public ConsoleCommandManager() {
         consoleCommandMap = new HashMap<>();
         consoleCommandMap.put("send", new SendToUserConsoleCommand());
+        consoleCommandMap.put("cg", new CreateGroupConsoleCommand());
     }
 
     @Override
@@ -30,6 +31,7 @@ public class ConsoleCommandManager implements ConsoleCommand {
         } else {
             System.err.println("无法识别[" + command + "]指令，请重新输入!");
             System.out.println("-----------send: 发消息某人---------------");
+            System.out.println("-----------cg: 创建群聊-------------------");
             System.out.println("-----------logout: 退出登录---------------");
         }
         waitForLoginResponse();

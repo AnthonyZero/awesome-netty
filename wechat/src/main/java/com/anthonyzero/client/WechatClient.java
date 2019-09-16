@@ -1,5 +1,6 @@
 package com.anthonyzero.client;
 
+import com.anthonyzero.client.handler.CreateGroupResponseHandler;
 import com.anthonyzero.client.handler.LoginResponseHandler;
 import com.anthonyzero.client.handler.MessageResponseHandler;
 import com.anthonyzero.codec.PacketDecoder;
@@ -46,7 +47,8 @@ public class WechatClient {
                         pipeline.addLast(new LoginResponseHandler());
                         // 收消息响应
                         pipeline.addLast(new MessageResponseHandler());
-
+                        // 创建群响应处理器
+                        pipeline.addLast(new CreateGroupResponseHandler());
                         //编码器
                         pipeline.addLast(new PacketEncoder());
                     }
