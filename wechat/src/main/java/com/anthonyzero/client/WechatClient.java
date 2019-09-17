@@ -6,6 +6,7 @@ import com.anthonyzero.codec.PacketEncoder;
 import com.anthonyzero.codec.Spliter;
 import com.anthonyzero.console.ConsoleCommandManager;
 import com.anthonyzero.console.LoginConsoleCommand;
+import com.anthonyzero.handler.IMIdleStateHandler;
 import com.anthonyzero.utils.SessionUtil;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.*;
@@ -37,6 +38,8 @@ public class WechatClient {
                     @Override
                     protected void initChannel(SocketChannel socketChannel) throws Exception {
                         ChannelPipeline pipeline = socketChannel.pipeline(); // handler顺序 从上到下
+                        // 空闲检测
+                        pipeline.addLast(new IMIdleStateHandler());
                         // 拆包
                         pipeline.addLast(new Spliter());
                         // 解码器
@@ -59,6 +62,8 @@ public class WechatClient {
                         pipeline.addLast(new LogoutResponseHandler());
                         //编码器
                         pipeline.addLast(new PacketEncoder());
+                        // 心跳定时器
+                        pipeline.addLast(new HeartBeatTimerHandler());
                     }
                 });
 

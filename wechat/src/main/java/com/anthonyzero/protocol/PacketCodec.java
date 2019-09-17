@@ -41,6 +41,8 @@ public class PacketCodec {
         packetTypeMap.put(Command.GROUP_MESSAGE_RESPONSE, GroupMessageResponsePacket.class);
         packetTypeMap.put(Command.LOGOUT_REQUEST, LogoutRequestPacket.class);
         packetTypeMap.put(Command.LOGOUT_RESPONSE, LogoutResponsePacket.class);
+        packetTypeMap.put(Command.HEARTBEAT_REQUEST, HeartBeatRequestPacket.class);
+        packetTypeMap.put(Command.HEARTBEAT_RESPONSE, HeartBeatResponsePacket.class);
 
         serializerMap = new HashMap<>();
         Serializer serializer = new JSONSerializer();

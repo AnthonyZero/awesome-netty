@@ -2,6 +2,7 @@ package com.anthonyzero.server;
 
 import com.anthonyzero.codec.PacketCodecHandler;
 import com.anthonyzero.codec.Spliter;
+import com.anthonyzero.handler.IMIdleStateHandler;
 import com.anthonyzero.server.handler.*;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
@@ -36,11 +37,15 @@ public class WechatServer {
                     .childHandler(new ChannelInitializer<NioSocketChannel>() {
                         protected void initChannel(NioSocketChannel nioSocketChannel) throws Exception {
                             ChannelPipeline pipeline =  nioSocketChannel.pipeline(); // handler顺序 从上到下
+                            // 空闲检测
+                            pipeline.addLast(new IMIdleStateHandler());
                             //拆包器 decode
                             pipeline.addLast(new Spliter());
                             //编码解码器
                             pipeline.addLast(PacketCodecHandler.INSTANCE);
                             pipeline.addLast(LoginRequestHandler.INSTANCE);
+                            // 回复客户端心跳包
+                            pipeline.addLast(HeartBeatRequestHandler.INSTANCE);
                             pipeline.addLast(AuthHandler.INSTANCE);
                             //聊天请求处理器
                             pipeline.addLast(IMHandler.INSTANCE);
