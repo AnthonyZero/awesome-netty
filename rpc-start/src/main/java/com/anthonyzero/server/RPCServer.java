@@ -43,7 +43,7 @@ public class RPCServer implements ApplicationContextAware {
             channelFuture.addListener(new GenericFutureListener<Future<? super Void>>() {
                 public void operationComplete(Future<? super Void> future) throws Exception {
                     if (future.isSuccess()) {
-                        System.out.println(">>>>> netty server 启动完成 <<<<<" + "端口[" + port + "]绑定成功!");
+                        System.out.println("启动完成-》" + "端口[" + port + "]绑定成功!");
                     } else {
                         System.err.println("端口[" + port + "]绑定失败!");
                     }
