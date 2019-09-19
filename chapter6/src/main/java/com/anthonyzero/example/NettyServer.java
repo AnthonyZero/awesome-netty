@@ -1,4 +1,4 @@
-package com.anthonyzero.demo;
+package com.anthonyzero.example;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;

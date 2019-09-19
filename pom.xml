@@ -16,6 +16,7 @@
         <module>chapter6</module>
         <module>wechat</module>
         <module>rpc-mini</module>
+        <module>rpc-start</module>
     </modules>
 
 
