@@ -18,6 +18,7 @@
         <module>rpc-mini</module>
         <module>rpc-start</module>
         <module>netty-springboot</module>
+        <module>netty-http</module>
     </modules>
 
 
