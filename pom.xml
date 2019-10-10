@@ -19,6 +19,7 @@
         <module>rpc-start</module>
         <module>netty-springboot</module>
         <module>netty-http</module>
+        <module>netty-jpa</module>
     </modules>
 
 
